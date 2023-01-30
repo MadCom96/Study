@@ -8,7 +8,6 @@ m = int(input())
 
 def solution() -> int:
     global n, fund_requests, m
-    s = sum(fund_requests)
     start = 0
     end = max(fund_requests) + 1
 
