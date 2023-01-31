@@ -26,4 +26,4 @@ longest = 0
 for k in kids:
     dp[k] = dp[k - 1] + 1
     longest = max(longest, dp[k])
-print(longest)
+print(n - longest)
