@@ -1,5 +1,4 @@
 # 줄임말
-
 s = input()
 t = input()
 
@@ -17,6 +16,7 @@ def getI(alpha: str) -> int:
 def check(a) -> bool:
     if len(tIndex[a]) == tII[a]:
         return False
+    # 역 매개변수 이분탐색
     l = tII[a]-1
     r = len(tIndex[a]) - 1
     while l != r - 1:
