@@ -22,26 +22,3 @@ def fill_dp(s):
     return dp[s//10]
 
 print(fill_dp(s))
-
-# ================dp가 아닌 풀이==========
-# s_copy = s
-# # 30버튼 없을때 최소 + 1(start)
-# no30 = s // 600
-# s %= 600
-# no30 += s // 60
-# s %= 60
-# no30 += s // 10
-# no30 += 1
-
-# s = s_copy - 30
-# # 30버튼 == start버튼일때 최소
-# yes30 = s // 600
-# s %= 600
-# yes30 += s // 60
-# s %= 60
-# yes30 += s //30
-# s %= 30
-# yes30 += s // 10
-# yes30 += 1
-
-# print(min(no30, yes30))

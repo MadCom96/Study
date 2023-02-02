@@ -12,7 +12,7 @@ tII = [0 for i in range(26)]
 def getI(alpha: str) -> int:
     return ord(alpha) - ord('a')
 
-
+# 현재 T에서 덧붙히지 않고 해당 알파벳을 찾을 수 있는가?
 def check(a) -> bool:
     if len(tIndex[a]) == tII[a]:
         return False
@@ -41,7 +41,7 @@ i = 0
 while i < len(s):
     # a 현재 다루는 s 알파벳의 인덱스
     a = getI(s[i])
-
+    # 만약 현재 알파벳이 t에 없으면
     if len(tIndex[a]) == 0:
         count = -1
         break
