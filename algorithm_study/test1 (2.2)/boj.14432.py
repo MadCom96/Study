@@ -1,59 +1,37 @@
 # 우물
 import sys
+sys.setrecursionlimit(100000)
 input = sys.stdin.readline
 
 n, m = map(int, input().rstrip().split())
 w = list(map(int, input().rstrip().split()))
-g = [list(map(int, input().rstrip().split())) for _ in range(m)]
-
 w.insert(0, 0)
 
-conn = [[] for i in range(n + 1)]
-for gg in g:
-    a = gg[0]
-    b = gg[1]
-    conn[a].append(b)
-    conn[b].append(a)
+# 루트노드를 0 (1을 연결시켜서) 로 만든다
+graph = [[] for i in range(n + 1)]
+graph[0].append(1)
 
-print(*conn, sep='\n')
+for i in range(m):
+    a, b = map(int,input().rstrip().split())
+    graph[a].append(b)
+    graph[b].append(a)
 
-dp = [0 for i in range(n + 1)]
-satisfied = [False for i in range(n + 1)]
-
-for i in range(1, n + 1):
-    if len(conn[i]) == 1:
-        dp[conn[i][0]] = w[i]
-
-print(dp)
-
-def needMore(v):
-    total = dp[v]
-    for c in conn[n]:
-        total += dp[c]
-    if total >= w[v]:
-        return True
-    return False
-
-next = [0 for i in range(n + 1)]
-highest = 0
-highestIdx = 0
-for v in range(1, n + 1):
-    if needMore(v):
-        satisfied[v] = True
-    else:
-        next[v] += 1
-        if highest < next[v]:
-            highest = next[v]
-            highestIdx = v
-        for nv in conn[v]:
-            next[nv] += 1
-            if highest < next[nv]:
-                highest = next[nv]
-                highestIdx = nv
-
-while True:
-    highestIdx
+fix = [0 for i in range(n + 1)]
 
 
-for v in range(1, n + 1):
-    if satisfied[v] 
+def fixSum(parent, now):
+    ans = 0
+    for nextV in graph[now]:
+        if nextV != parent:
+            ans += fix[nextV]
+    return ans + fix[now]
+
+
+def dfs(parent, now) -> int:
+    for nextV in graph[now]:
+        if nextV != parent:
+            fix[now] = max(fix[now], dfs(now, nextV))
+    return max(w[now] - fixSum(parent, now), 0)
+
+dfs(0, 0)
+print(sum(fix))
