@@ -20,7 +20,7 @@ while len(dq) != 0:
 
     warp = current * 2
     
-    if warp < lim and dist[warp] > dist[current]:
+    if warp < lim and dist[warp] >= dist[current]:
         dist[warp] = dist[current]
         dq.appendleft(warp)
     if 0 <= current - 1 < lim:

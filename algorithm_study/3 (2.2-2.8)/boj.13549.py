@@ -24,7 +24,7 @@ while len(dheap) != 0:
     if 0 <= fromV + 1 < lim:
         dijkstra[fromV + 1] = min(dijkstra[fromV + 1], time + 1)
         heappush(dheap, (time + 1, fromV + 1))
-    if 0 < fromV * 2 < lim:
+    if 0 <= fromV * 2 < lim:
         if abs(k - fromV) >= abs(k - fromV * 2):
             dijkstra[fromV * 2] = min(dijkstra[fromV * 2], time)
             heappush(dheap, (time, fromV * 2))
