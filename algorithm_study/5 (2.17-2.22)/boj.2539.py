@@ -7,7 +7,6 @@ wrong = int(input())
 wrong_cells = [tuple(map(int, sys.stdin.readline().rstrip().split())) for _ in range(wrong)]
 wrong_cells.sort(key= lambda x:x[1])
 
-# 잘못칠해진 칸이 1000개 이하니까 그냥 검사해도 통과하지 않을까...?
 def upperbound(i):
     l = 0
     r = wrong

@@ -36,6 +36,7 @@ def check(m) -> bool:
         if i > x[-1]:
             return False
 
+
 # 매개변수 이분탐색
 l = 1
 r = x[-1] + 1
