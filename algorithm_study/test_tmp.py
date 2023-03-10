@@ -3,10 +3,5 @@ i = 0
 while a != 1:
     print(a)
     i += 1
-    print(i)
+    print(i, '번 계산')
     a //= 2
-
-print(10 % 3)
-aa = 10
-aa %= 3
-print(aa)

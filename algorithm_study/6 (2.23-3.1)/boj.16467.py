@@ -1,6 +1,5 @@
 # 병아리의 변신은 무죄
 import sys
-from copy import deepcopy
 input = sys.stdin.readline
 
 class Matrix:
@@ -34,6 +33,7 @@ class Matrix:
             for x in range(len(tmp.m[0])):
                 for k in range(len(self.m[0])):
                     tmp.m[y][x] += self.m[y][k] * mat.m[k][x]
+                    # 없으면 시간초과
                     tmp.m[y][x] = int(tmp.m[y][x] % 100000007)
         return tmp
 
@@ -63,7 +63,10 @@ for tc in range(t):
     m.getKM(k)
 
     # (증요!!!!) m ^ n을 효과적으로 구한다
+    # 없으면 시간초과
+    # 문제 태그에 '분할 정복을 이용한 거듭제곱'.....
     m = power(m_orig, n)
+    print(*m.m, sep='\n')
 
     # [1 0 0 ...] 와 곱한다.
     egg = [0] * (k + 1)
