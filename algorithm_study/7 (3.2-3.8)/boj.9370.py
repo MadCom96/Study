@@ -16,7 +16,7 @@ def dijkstra(node) -> list:
     fixed = [False] * v
     fixed[node] = True
     isDone = True
-
+    
     while True:
         shortest = inf
         shortest_idx = -1
@@ -35,19 +35,15 @@ def dijkstra(node) -> list:
     return d
 
 
-# 1 ~ 100
 t = int(input())
 for ti in range(t):
-    # 2 ~ 2000, 1 ~ 50000, 1 ~ 100
     n, m, t = map(int, input().split())
-    # 1 ~ n
     s, g, h = map(int, input().split())
 
     graph = [[inf] * n for _ in range(n)]
     for i in range(n):
         graph[i][i] = 0
     for mi in range(m):
-        # 1 ~ a ~ b ~ n, 1 ~ 1000
         a, b, d = map(int, input().split())
         graph[a-1][b-1] = d
         graph[b-1][a-1] = d
@@ -55,9 +51,6 @@ for ti in range(t):
     dijk_sp = dijkstra(s)
     dijk_g = dijkstra(g)
     dijk_h = dijkstra(h)
-    # print(dijk_sp)
-    # print(dijk_g)
-    # print(dijk_h)
 
     ans = []
     for ti in range(t):
