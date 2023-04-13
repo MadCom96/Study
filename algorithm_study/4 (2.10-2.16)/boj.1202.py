@@ -1,44 +1,29 @@
-# 보석 도둑
+# 보석도둑
 import sys
 from heapq import *
 input = sys.stdin.readline
 
-n, k = map(int, input().rstrip().split())
+n, k = map(int, input().split())
+
 jewels = []
 for _ in range(n):
-    m, v = map(int, input().rstrip().split())
-    heappush(jewels, (-v, m))
+    m, v = map(int, input().split())
+    heappush(jewels, (m, v))
 
-# 각 가방에는 보석을 최대 한개씩만 담을 수 있다.
-backpacks = []
+bags = []
 for _ in range(k):
-    backpacks.append(int(input().rstrip()))
-backpacks.sort()
+    c = int(input())
+    heappush(bags, c)
 
+mostExpensive = []
 ans = 0
-while len(backpacks) != 0 and len(jewels) != 0:
-    value, mass = heappop(jewels)
-    value = -value
-
-    l = 0
-    r = len(backpacks)
-    while l + 1 != r:
-        m = (l + r) // 2
-        if backpacks[m] > mass:
-            r = m
-        elif backpacks[m] == mass:
-            l = m
-            break
-        else:
-            l = m
-    if backpacks[l] >= mass:
-        ans += value
-        backpacks.pop(l)
-    elif r < len(backpacks) and backpacks[r] >= mass:
-        ans += value
-        backpacks.pop(r)
+while bags and (jewels or mostExpensive):
+    bag = heappop(bags)
+    while jewels and jewels[0][0] <= bag:
+        m, v = heappop(jewels)
+        heappush(mostExpensive, -v)
+    if mostExpensive:
+        ans += heappop(mostExpensive)
     else:
-        pass
-print(ans)
-
-# 이분탐색 (시간초과)
+        continue
+print(-ans)

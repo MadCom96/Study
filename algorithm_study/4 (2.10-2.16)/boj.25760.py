@@ -3,43 +3,44 @@ import sys
 from collections import deque
 input = sys.stdin.readline
 
-n = int(input().rstrip())
-g = [[] for _ in range(n + 1)]
+n = int(input())
+conn = [[] for _ in range(n+1)]
+for _ in range(n-1):
+    a, b = map(int, input().split())
+    conn[a].append(b)
+    conn[b].append(a)
 
-for _ in range(n - 1):
-    a, b = map(int, input().rstrip().split())
-    g[a].append(b)
-    g[b].append(a)
+cars_init = list(map(int, input().split()))
+cars_init.insert(0, 0)
 
-cars = list(map(int, input().rstrip().split()))
-count_car = cars.count(1)
-cars.insert(0, 0)
+depths = []
 
-time = 0
-bfs = deque()
-visited = [False] * (n + 1)
-visited[1] = True
+parents = deque([0])
+bfs = deque([1])
+depthDQ = deque([0])
+while bfs:
+    p = parents.popleft()
+    node = bfs.popleft()
+    dd = depthDQ.popleft()
+    if cars_init[node] == 1:
+        depths.append(dd)
+    for c in conn[node]:
+        if c == p:
+            continue
+        parents.append(node)
+        bfs.append(c)
+        depthDQ.append(dd + 1)
 
-# bfs마다
-while True:
-    bfs = deque()
-    bfs.append(1)
-    time += 1
-    visited = [False] * (n + 1)
-    visited[1] = True
-    # 시간마다
-    while len(bfs) != 0:
-        now = bfs.popleft()
-        if now == 1 and cars[now] == 1:
-            cars[now] = 0
-            count_car -= 1
-            if count_car == 0:
-                print(time)
-                exit(0)
-        for conn in g[now]:
-            if not visited[conn]:
-                visited[conn] = True
-                bfs.append(conn)
-                if cars[now] == 0 and cars[conn] == 1:
-                    cars[now] = 1
-                    cars[conn] = 0
+# print(depths)
+
+lencars = len(depths)
+cnt = 0
+ans = 0
+# bfs를 해서 깊이를 구했으므로 깊이가 길수록 뒤에 있을 수 밖에 없다.
+# 이를 역순으로 돌린다면 멀리있는 차를 먼저 보낸다는 가정을 할수있다.
+for i in range(lencars-1, -1, -1):
+    cnt += 1
+    time = cnt + depths[i]
+    if time > ans:
+        ans = time
+print(ans)
