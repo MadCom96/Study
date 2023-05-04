@@ -1,3 +1,4 @@
+# 스티커
 t = int(input())
 
 for tc in range(t):
@@ -12,11 +13,6 @@ for tc in range(t):
         dp[1][i] = max(dp[0][i-1], dp[2][i-1]) + sticker[1][i]
         dp[2][i] = max(dp[0][i-1], dp[1][i-1])
     print(max(max(dp[0][n-1], dp[1][n-1]), dp[2][n-1]))
-
-
-
-
-
 # [0][n]
 # 이번꺼에서 위를 선택하는 최대값
 
