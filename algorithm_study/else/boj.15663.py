@@ -1,0 +1,30 @@
+n, m = map(int, input().split())
+nums = list(map(int, input().split()))
+nums.sort()
+stack = []
+done = set()
+
+def dfs(ith):
+    global n, m, nums, stack, done
+
+    for i in range(n):
+        if i in stack:
+            continue
+        stack.append(i)
+        # 마지막원소까지 채웠다면 
+        if ith == m:
+            # print(stack)
+            tmp = []
+            for i in range(len(stack)):
+                tmp.append(nums[stack[i]])
+            tmp = tuple(tmp)
+            if tmp in done:
+                pass
+            else:
+                done.add(tmp)
+                print(*tmp)
+        else:
+            dfs(ith+1)
+        stack.pop()
+
+dfs(1)
