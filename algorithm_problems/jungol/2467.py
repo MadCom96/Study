@@ -10,14 +10,17 @@ roots = [i for i in range(n + 1)]
 
 def find(node) -> int:
     global roots
-    return roots[node]
+    if node == roots[node]:
+        return node
+    else:
+        return find(roots[node])
 
-def union():
-    pass
-
-
+def union(a, b):
+    global roots
+    aroot = find(a)
+    broot = find(b)
+    roots[b] = a
 
 for edge in edges:
     # 한 줄씩 추가하면서 유니온 파인드
-
-# in progress
+    # 15 6 3
