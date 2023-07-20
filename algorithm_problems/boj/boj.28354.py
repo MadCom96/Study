@@ -1,5 +1,7 @@
-# 링크 컷 토마토import sys
+# 링크 컷 토마토
+import sys
 from heapq import *
+# 재채점 된다면 쉬디가 감염될때 day 설정이 잘못되진 않았는지 확인
 
 input = sys.stdin.readline
 print = sys.stdout.write
@@ -80,22 +82,3 @@ while True:
 
 for i in range(1, n+1):
     print("%d " % (ripeday[i] if ripeday[i] != inf else -1))
-
-
-
-# infections이 진행되다가~~~
-# 갑자기 멈춰!
-# 그리고 10일부터 다시~~
-#
-# 감염
-#  - 감염체크
-#   - 감염이 있어!!
-#    -> 다음날도 있을수도 있어 진행
-#     - 다음날은 += 1
-#   - 감염이 없어!!!!
-#    -> 다음 변화까지 감염은 없겠군
-#     - 다음날은 changes의 다음 원소
-#
-# while이 끝나는 조건?
-#     더 이상의 변화가 없을 때!
-#         노드 변화 없고 감염변화 없음
